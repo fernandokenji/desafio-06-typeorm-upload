@@ -207,7 +207,7 @@ describe('Transaction', () => {
     const transactions = await transactionsRepository.find();
     const categories = await categoriesRepository.find();
 
-    expect(categories).toHaveLength(3);
+    expect(categories).toHaveLength(2);
     expect(categories).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -215,9 +215,6 @@ describe('Transaction', () => {
         }),
         expect.objectContaining({
           title: 'Food',
-        }),
-        expect.objectContaining({
-          title: 'Eletronics',
         }),
       ]),
     );
@@ -235,10 +232,6 @@ describe('Transaction', () => {
         }),
         expect.objectContaining({
           title: 'Ice cream',
-          type: 'outcome',
-        }),
-        expect.objectContaining({
-          title: 'PS5',
           type: 'outcome',
         }),
       ]),
