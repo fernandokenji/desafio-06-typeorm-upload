@@ -13,11 +13,11 @@ let connection: Connection;
 describe('Transaction', () => {
   beforeAll(async () => {
     connection = await createConnection('test-connection');
-    
+
     await connection.query('DROP TABLE IF EXISTS transactions');
     await connection.query('DROP TABLE IF EXISTS categories');
     await connection.query('DROP TABLE IF EXISTS migrations');
-    
+
     await connection.runMigrations();
   });
 
@@ -207,7 +207,7 @@ describe('Transaction', () => {
     const transactions = await transactionsRepository.find();
     const categories = await categoriesRepository.find();
 
-    expect(categories).toHaveLength(2);
+    expect(categories).toHaveLength(3);
     expect(categories).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -216,10 +216,13 @@ describe('Transaction', () => {
         expect.objectContaining({
           title: 'Food',
         }),
+        expect.objectContaining({
+          title: 'Eletronics',
+        }),
       ]),
     );
 
-    expect(transactions).toHaveLength(3);
+    expect(transactions).toHaveLength(4);
     expect(transactions).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -232,6 +235,10 @@ describe('Transaction', () => {
         }),
         expect.objectContaining({
           title: 'Ice cream',
+          type: 'outcome',
+        }),
+        expect.objectContaining({
+          title: 'PS5',
           type: 'outcome',
         }),
       ]),
